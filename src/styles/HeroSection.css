@@ -1,0 +1,144 @@
+.hero {
+  padding: 40px 0 60px;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f4fd;
+  color: #0066cc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.search-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.search-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex: 1;
+}
+
+.service-input,
+.location-input {
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.service-input:focus,
+.location-input:focus {
+  border-color: #0066cc;
+}
+
+.search-button {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-end;
+}
+
+.search-button:hover {
+  background: #0052a3;
+}
+
+.features {
+  display: flex;
+  gap: 24px;
+}
+
+.feature {
+  color: #666;
+  font-size: 14px;
+  position: relative;
+}
+
+.feature:not(:last-child)::after {
+  content: '•';
+  position: absolute;
+  right: -14px;
+  color: #ccc;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 20px 0 40px;
+  }
+  
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .search-form {
+    flex-direction: column;
+  }
+  
+  .search-inputs {
+    order: 1;
+  }
+  
+  .search-button {
+    order: 2;
+    align-self: stretch;
+  }
+  
+  .features {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .feature:not(:last-child)::after {
+    display: none;
+  }
+}

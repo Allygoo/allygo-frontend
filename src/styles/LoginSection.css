@@ -1,0 +1,250 @@
+.login-section {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.login-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.login-tabs {
+  display: flex;
+  background-color: #f9fafb;
+}
+
+.tab {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  background-color: transparent;
+  color: #6b7280;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background-color: white;
+  color: #1d4ed8;
+  border-bottom: 2px solid #1d4ed8;
+}
+
+.login-form {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #9ca3af;
+  z-index: 1;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 12px 12px 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.checkbox-container input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+}
+
+.forgot-password {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.login-button {
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background-color: #1e40af;
+}
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.social-login {
+  padding: 0 24px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.social-button:hover {
+  background-color: #f3f4f6;
+}
+
+.social-button.gmail {
+  color: #ea4335;
+}
+
+.social-button.apple {
+  color: #000;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.signup-prompt {
+  padding: 0 24px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.signup-link {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  padding: 0 24px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.4;
+}
+
+.terms-link {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    padding: 20px;
+  }
+  
+  .social-login {
+    padding: 0 20px 20px;
+    grid-template-columns: 1fr;
+  }
+  
+  .signup-prompt,
+  .terms {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

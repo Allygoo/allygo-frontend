@@ -10,27 +10,57 @@ const categories = [
   {
     name: 'Plomería',
     image: plumbingImg,
-    link: 'Ver servicios'
+    subcategories: [
+      'Reparación de tuberías',
+      'Instalación de grifos',
+      'Destape de desagües',
+      'Reparación de inodoros',
+      'Instalación de calentadores'
+    ]
   },
   {
     name: 'Electricidad',
     image: lightsImg,
-    link: 'Ver servicios'
+    subcategories: [
+      'Instalación de luminarias',
+      'Reparación de tomas',
+      'Instalación de ventiladores',
+      'Reparación de breakers',
+      'Cableado eléctrico'
+    ]
   },
   {
     name: 'Cerrajería',
     image: keysImg,
-    link: 'Ver servicios'
+    subcategories: [
+      'Apertura de puertas',
+      'Cambio de chapas',
+      'Duplicado de llaves',
+      'Instalación de cerraduras',
+      'Reparación de candados'
+    ]
   },
   {
     name: 'Albañilería',
     image: constructionImg,
-    link: 'Ver servicios'
+    subcategories: [
+      'Reparación de muros',
+      'Instalación de pisos',
+      'Pintura de paredes',
+      'Reparación de techos',
+      'Construcción de divisiones'
+    ]
   },
   {
     name: 'Aseo',
     image: cleaningImg,
-    link: 'Ver servicios'
+    subcategories: [
+      'Limpieza profunda',
+      'Limpieza de ventanas',
+      'Desinfección',
+      'Limpieza de alfombras',
+      'Limpieza post-construcción'
+    ]
   }
 ]
 
@@ -46,14 +76,20 @@ const CategoriesSection = () => {
               src={category.image} 
               alt={category.name}
               className="category-image"
-              referrerpolicy="no-referrer"
+              referrerPolicy="no-referrer"
             />
             <div className="category-content">
               <h3 className="category-name">{category.name}</h3>
-              <div className="category-actions">
-                <span className="category-services">Ver servicios</span>
-                <a href="#" className="category-link">Ver</a>
-              </div>
+            </div>
+
+            {/* Subcategorías SIEMPRE visibles */}
+            <div className="category-subcategories">
+              <h4 className="subcategories-title">Servicios disponibles:</h4>
+              <ul className="subcategories-list">
+                {category.subcategories.map((sub, i) => (
+                  <li key={i} className="subcategory-item">{sub}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}

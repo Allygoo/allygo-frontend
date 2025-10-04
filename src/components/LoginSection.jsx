@@ -9,13 +9,13 @@ function LoginSection() {
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
   
-  // Estados adicionales para registro
+  // Estados para registro
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [userType, setUserType] = useState('consumer') 
   const [acceptTerms, setAcceptTerms] = useState(false)
   
-  // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault()
     if (activeTab === 'login') {
@@ -25,12 +25,38 @@ function LoginSection() {
     }
   }
   
-  const handleLogin = () => {
-    console.log('Login attempt:', { email, password, rememberMe })
-    // Aquí implementarías la lógica de login
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          rememberMe: rememberMe
+        })
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        console.log('Login exitoso:', data)
+        alert('¡Inicio de sesión exitoso!')
+        // Aquí puedes manejar el token, redireccionar, etc.
+        // localStorage.setItem('token', data.token)
+      } else if (response.status === 401) {
+        alert('Credenciales inválidas. Por favor verifica tu email y contraseña.')
+      } else {
+        throw new Error(`Error ${response.status}: ${response.statusText}`)
+      }
+    } catch (error) {
+      console.error('Error en login:', error)
+      alert('Error al iniciar sesión. Por favor intenta nuevamente.')
+    }
   }
   
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden')
       return
@@ -39,14 +65,46 @@ function LoginSection() {
       alert('Debes aceptar los términos y condiciones')
       return
     }
-    console.log('Register attempt:', { 
-      firstName, 
-      lastName, 
-      email, 
-      password,
-      acceptTerms 
-    })
-    // Aquí implementarías la lógica de registro
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          userType: userType,
+          acceptTerms: acceptTerms
+        })
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        console.log('Registro exitoso:', data)
+        alert('¡Registro exitoso! Ahora puedes iniciar sesión.')
+        // Cambiar automáticamente a la pestaña de login
+        setActiveTab('login')
+        // Limpiar formulario
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+        setUserType('consumer')
+        setAcceptTerms(false)
+      } else if (response.status === 400) {
+        alert('Datos de usuario inválidos. Por favor verifica la información.')
+      } else {
+        throw new Error(`Error ${response.status}: ${response.statusText}`)
+      }
+    } catch (error) {
+      console.error('Error en registro:', error)
+      alert('Error al registrar usuario. Por favor intenta nuevamente.')
+    }
   }
 
   return (
@@ -70,37 +128,58 @@ function LoginSection() {
         <form className="login-form" onSubmit={handleSubmit}>
           {activeTab === 'register' && (
             <>
-              <div className="form-group">
-                <div className="input-container">
-                  <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="form-input"
-                    required
-                  />
+              <div className="form-group form-row">
+                <div className="form-group">
+                  <div className="input-container">
+                    <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Nombre"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      className="form-input"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <div className="input-container">
+                    <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Apellido"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      className="form-input"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
               
               <div className="form-group">
                 <div className="input-container">
                   <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <path d="M20 8v6M23 11h-6"></path>
                   </svg>
-                  <input
-                    type="text"
-                    placeholder="Apellido"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="form-input"
+                  <select
+                    value={userType}
+                    onChange={(e) => setUserType(e.target.value)}
+                    className="form-input form-select"
                     required
-                  />
+                  >
+                    <option value="consumer">Persona que consume servicios</option>
+                    <option value="professional">Profesional que ofrece servicios</option>
+                  </select>
                 </div>
               </div>
             </>
@@ -232,14 +311,6 @@ function LoginSection() {
               </button>
             </>
           )}
-        </div>
-        
-        <div className="terms">
-          <span>Al continuar aceptas los </span>
-          <a href="#" className="terms-link">Términos</a>
-          <span> y la </span>
-          <a href="#" className="terms-link">Política de privacidad</a>
-          <span>.</span>
         </div>
       </div>
     </section>

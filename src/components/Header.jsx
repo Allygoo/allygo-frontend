@@ -32,7 +32,7 @@ const Header = () => {
 
         <div className="header-actions">
           <button className="publish-btn" onClick={handleLoginClick}>
-            Iniciar Sesión / Registro
+            Regristrarse / Iniciar Sesión  
           </button>
         </div>
       </div>

@@ -1,0 +1,23 @@
+/* Layout de página completa. Cuando se usa dentro de un modal lo sobreescribimos en Modal.css */
+.app {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Contenedor principal de la página. En modal se anula el max-width y padding */
+.app-content {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+}

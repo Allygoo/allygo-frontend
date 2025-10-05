@@ -4,12 +4,12 @@ import ServiceOptions from './ServiceOptions'
 import ProfessionalsList from './ProfessionalsList'
 import '../../styles/Services/ServiceContent.css'
 
-const MainContent = () => {
+const MainContent = ({ categoryId }) => {
   return (
     <main className="main-content">
-      <ServiceHeader />
-      <ServiceOptions />
-      <ProfessionalsList />
+      <ServiceHeader categoryId={categoryId} />
+      <ServiceOptions categoryId={categoryId} />
+      <ProfessionalsList categoryId={categoryId} />
     </main>
   )
 }

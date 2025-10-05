@@ -31,9 +31,9 @@ const ServiceHeader = () => {
           <span className="category">Calentadores</span>
         </div>
       </div>
-      <button className="request-professional-btn">
+      {/* <button className="request-professional-btn">
         Solicitar profesional
-      </button>
+      </button> */}
     </div>
   )
 }

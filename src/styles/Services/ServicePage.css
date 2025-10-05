@@ -3,4 +3,40 @@
   flex: 1;
   gap: 20px;
   padding: 20px;
+  align-items: flex-start; /* evita que el sidebar estire verticalmente */
+  box-sizing: border-box;
+}
+
+/* Ajuste de gap en tablets / pantallas medianas */
+@media (max-width: 1024px) {
+  .app-body {
+    gap: 16px;
+  }
+}
+
+/* Columna en pantallas pequeñas: Sidebar arriba, contenido abajo */
+@media (max-width: 900px) {
+  .app-body {
+    flex-direction: column;
+    padding: 16px;
+  }
+  .app-body .sidebar {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 8px; /* ya había un margin en media query interna, reforzamos */
+  }
+  .app-body .main-content {
+    width: 100%;
+  }
+}
+
+/* Extra pequeño: reducimos padding y espacios */
+@media (max-width: 480px) {
+  .app-body {
+    padding: 12px;
+    gap: 12px;
+  }
+  .app-body .main-content {
+    gap: 12px; /* se suma a media query de main-content propia */
+  }
 }

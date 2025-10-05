@@ -1,0 +1,23 @@
+.professionals-list {
+  flex: 1;
+}
+
+.professionals-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 24px;
+}
+
+.professionals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .professionals-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

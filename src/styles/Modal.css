@@ -1,0 +1,117 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* centrado vertical */
+  padding: 40px 16px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.modal-panel {
+  position: relative;
+  background: #fff;
+  width: min(100%, 760px); /* un poco menos para evitar desbordes en móviles */
+  border-radius: 16px;
+  padding: 24px 28px 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  animation: modalFadeIn .25s ease;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto; /* scroll interno si excede */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background .15s, color .15s;
+}
+
+.modal-close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pequeño ajuste para el componente CreateServiceOrder dentro del modal */
+.modal-panel .app {
+  /* Neutralizamos layout de página completa dentro del modal */
+  min-height: auto;
+  background: transparent;
+  margin: 0;
+  width: 100%;
+}
+
+.modal-panel .app-content {
+  /* Quitamos max-width y centrado de página; usamos scroll propio del modal */
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  flex-direction: column; /* En modal suele ser vertical */
+  gap: 20px;
+}
+
+/* Inputs de fecha/hora: aseguramos que se ajusten al contenedor y usen wrap si están en una fila */
+.modal-panel .form-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.modal-panel .form-row .form-field {
+  flex: 1 1 240px; /* cada campo mínimo 240px, crece si hay espacio */
+  min-width: 0; /* permite que el input se contraiga sin overflow */
+}
+
+.modal-panel .form-field .field-input[type="datetime-local"] {
+  width: 100%;
+  min-width: 0;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* En pantallas muy pequeñas, forzamos columna completa */
+@media (max-width: 540px) {
+  .modal-panel .form-row {
+    flex-direction: column;
+  }
+}
+
+/* Si dentro hay formularios muy anchos, limitamos y hacemos scroll interno si excede */
+.modal-panel .app-content > * {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ajuste responsive dentro del modal */
+@media (max-width: 640px) {
+  .modal-panel .app-content {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-panel {
+    padding: 20px 20px 28px;
+    border-radius: 14px;
+  }
+  .modal-close { top: 6px; right: 8px; }
+}

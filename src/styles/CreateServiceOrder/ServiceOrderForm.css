@@ -1,0 +1,12 @@
+.service-order-container {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .service-order-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

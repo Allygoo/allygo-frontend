@@ -1,0 +1,37 @@
+.app {
+  background-color: white;
+  min-height: 100vh;
+  margin-top: 10px;
+}
+
+/* Layout específico de la página de profesionales para evitar choque con otros .main-content */
+.professionals-layout {
+  display: flex;
+  align-items: flex-start; /* asegura tope alineado */
+  gap: 32px;
+  padding: 0 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.professionals-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0; /* evita overflow horizontal cuando hay grids internos */
+}
+
+@media (max-width: 768px) {
+  .professionals-layout {
+    flex-direction: column;
+    padding: 0 12px;
+    gap: 24px;
+  }
+
+  .professionals-content {
+    gap: 20px;
+  }
+}

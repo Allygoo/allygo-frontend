@@ -18,7 +18,7 @@ const categories = [
       'Reparación de inodoros',
       'Instalación de calentadores'
     ],
-    route: '/services'
+    route: '/services/1'
   },
   {
     name: 'Electricidad',
@@ -30,7 +30,7 @@ const categories = [
       'Reparación de breakers',
       'Cableado eléctrico'
     ],
-    route: '/services'
+    route: '/services/2'
   },
   {
     name: 'Cerrajería',
@@ -42,7 +42,7 @@ const categories = [
       'Instalación de cerraduras',
       'Reparación de candados'
     ],
-    route: '/services'
+    route: '/services/3'
   },
   {
     name: 'Albañilería',
@@ -54,7 +54,7 @@ const categories = [
       'Reparación de techos',
       'Construcción de divisiones'
     ],
-    route: '/services'
+    route: '/services/4'
   },
   {
     name: 'Aseo',
@@ -66,7 +66,7 @@ const categories = [
       'Limpieza de alfombras',
       'Limpieza post-construcción'
     ],
-    route: '/services'
+    route: '/services/5'
   }
 ]
 

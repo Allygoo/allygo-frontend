@@ -1,0 +1,134 @@
+.professional-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  transition: box-shadow 0.2s;
+  position: relative;
+}
+
+.professional-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.professional-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap; /* permite que el botón baje sin solaparse */
+}
+
+.professional-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.professional-info {
+  flex: 1;
+}
+
+.professional-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.professional-type {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.btn-profile {
+  padding: 8px 16px;
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-profile:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.professional-stats {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px; /* separación entre bloques de stats */
+  padding-top: 4px;
+  margin-top: 4px;
+  border-top: 1px solid #f1f5f9; /* separador visual */
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star-icon {
+  flex-shrink: 0;
+}
+
+.rating-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.review-count {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clock-icon {
+  flex-shrink: 0;
+}
+
+.availability-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .professional-header {
+    flex-wrap: wrap;
+  }
+
+  .btn-profile {
+    order: 3;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .professional-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+}

@@ -9,6 +9,8 @@ import ProfessionalSection from './components/ProfessionalSection'
 import Footer from './components/Footer'
 import MainContent from './components/MainContent'
 import Services from './components/ServicesPage/ServicePage'
+import Professionals from './components/ProfessionalsPage/Professionals'
+import CreateServiceOrder from './components/CreateServiceOrder/CreateServiceOrder'
 import './styles/App.css'
 
 // Componente para la página de inicio
@@ -31,6 +33,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<MainContent />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/:categoryId" element={<Services />} />
+          <Route path="/services/:categoryId/professionals/:serviceId" element={<Professionals />} />
         </Routes>
       </main>
       <Footer />

@@ -20,6 +20,45 @@
   color: #111827;
 }
 
+/* Contenedor del icono del servicio */
+.service-icon-container {
+  width: 100px;              /* tamaño fijo para consistencia */
+  height: 100px;
+  border-radius: 12px;       /* esquinas redondeadas suaves */
+  background: #f3f4f6;       /* gris claro para fondo neutro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;          /* evita overflow si la imagen es irregular */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+/* Imagen del servicio */
+.service-icon-container .service-icon {
+  width: 60%;                /* no llenar completamente para aire visual */
+  height: 60%;
+  object-fit: contain;       /* mantener proporciones */
+  display: block;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+  transition: transform 0.25s ease;
+}
+
+.service-option:hover .service-icon-container .service-icon {
+  transform: scale(1.08);
+}
+
+/* Variante si quisieras un tamaño más pequeño (aplicable con clase opcional) */
+.service-icon-container.sm {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.service-icon-container.sm .service-icon {
+  width: 65%;
+  height: 65%;
+}
+
 .option-details {
   flex: 1;
 }

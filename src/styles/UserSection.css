@@ -1,0 +1,224 @@
+/* Container general */
+.user-page {
+  padding: 60px 20px;
+  background: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Breadcrumb */
+.user-page > div.text-sm {
+  margin-bottom: 20px;
+  color: #6b7280; /* gris suave */
+}
+
+/* Header Card */
+.user-card-header {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.user-card-header .bg-gradient {
+  height: 130px;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+.user-avatar {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin-top: -65px; /* eleva el avatar sobre el header */
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  border: 4px solid white;
+  object-fit: cover;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.user-avatar-status {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  background: #22c55e; /* verde activo */
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+/* User Info */
+.user-details h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.user-details p {
+  color: #4b5563;
+  margin: 6px 0;
+}
+
+.user-details .user-bio {
+  font-style: italic;
+  color: #6b7280;
+}
+
+/* Botón Editar */
+.edit-btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Cards de Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  padding: 20px;
+  border-left-width: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-card .icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-card.blue { border-color: #3b82f6; }
+.stat-card.green { border-color: #10b981; }
+.stat-card.purple { border-color: #8b5cf6; }
+
+.stat-card .icon-container.bg-blue { background: #bfdbfe; }
+.stat-card .icon-container.bg-green { background: #d1fae5; }
+.stat-card .icon-container.bg-purple { background: #ddd6fe; }
+
+/* Info Cards */
+.info-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  padding: 24px;
+}
+
+.info-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  transition: all 0.2s;
+  margin-bottom: 10px;
+}
+
+.info-item:hover {
+  background: #f3f4f6;
+}
+
+.info-item .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-item p {
+  margin: 0;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.quick-action-btn {
+  background: #f0f9ff;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.quick-action-btn:hover {
+  transform: scale(1.05);
+}
+
+.quick-action-btn .icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-page {
+    padding: 40px 16px;
+  }
+
+  .user-details h1 {
+    font-size: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

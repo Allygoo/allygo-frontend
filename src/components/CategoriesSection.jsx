@@ -5,6 +5,7 @@ import cleaningImg from '../assets/cleaning.jpg'
 import lightsImg from '../assets/lights.jpg'
 import constructionImg from '../assets/construction.jpg'
 import '../styles/CategoriesSection.css'
+import { useNavigate } from 'react-router-dom'
 
 const categories = [
   {
@@ -16,7 +17,8 @@ const categories = [
       'Destape de desagües',
       'Reparación de inodoros',
       'Instalación de calentadores'
-    ]
+    ],
+    route: '/services'
   },
   {
     name: 'Electricidad',
@@ -27,7 +29,8 @@ const categories = [
       'Instalación de ventiladores',
       'Reparación de breakers',
       'Cableado eléctrico'
-    ]
+    ],
+    route: '/services'
   },
   {
     name: 'Cerrajería',
@@ -38,7 +41,8 @@ const categories = [
       'Duplicado de llaves',
       'Instalación de cerraduras',
       'Reparación de candados'
-    ]
+    ],
+    route: '/services'
   },
   {
     name: 'Albañilería',
@@ -49,7 +53,8 @@ const categories = [
       'Pintura de paredes',
       'Reparación de techos',
       'Construcción de divisiones'
-    ]
+    ],
+    route: '/services'
   },
   {
     name: 'Aseo',
@@ -60,9 +65,43 @@ const categories = [
       'Desinfección',
       'Limpieza de alfombras',
       'Limpieza post-construcción'
-    ]
+    ],
+    route: '/services'
   }
 ]
+
+
+function CategoryCard({ name, image, subcategories, route}, index) {
+  const navigate = useNavigate();
+
+  const go = () => {
+    navigate(route);
+  };
+
+  return (
+    <div key={index} className="category-card" onClick={go} onKeyDown={(e) => { if (e.key === 'Enter') go(); }}>
+      <img 
+        src={image} 
+        alt={name}
+        className="category-image"
+        referrerPolicy="no-referrer"
+      />
+      <div className="category-content">
+        <h3 className="category-name">{name}</h3>
+      </div>
+
+      {/* Subcategorías SIEMPRE visibles */}
+      <div className="category-subcategories">
+        <h4 className="subcategories-title">Servicios disponibles:</h4>
+        <ul className="subcategories-list">
+          {subcategories.map((sub, i) => (
+            <li key={i} className="subcategory-item">{sub}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 const CategoriesSection = () => {
   return (
@@ -71,27 +110,13 @@ const CategoriesSection = () => {
       
       <div className="categories-grid">
         {categories.map((category, index) => (
-          <div key={index} className="category-card">
-            <img 
-              src={category.image} 
-              alt={category.name}
-              className="category-image"
-              referrerPolicy="no-referrer"
-            />
-            <div className="category-content">
-              <h3 className="category-name">{category.name}</h3>
-            </div>
-
-            {/* Subcategorías SIEMPRE visibles */}
-            <div className="category-subcategories">
-              <h4 className="subcategories-title">Servicios disponibles:</h4>
-              <ul className="subcategories-list">
-                {category.subcategories.map((sub, i) => (
-                  <li key={i} className="subcategory-item">{sub}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <CategoryCard
+            name={category.name}
+            image={category.image}
+            subcategories={category.subcategories}
+            route={category.route}
+            index={index}
+          />
         ))}
       </div>
     </section>

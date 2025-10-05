@@ -14,7 +14,7 @@ const Header = () => {
     navigate('/')
   }
 
-  return (
+    return (
     <header className="header">
       <div className="header-container">
         <div className="logo">
@@ -25,7 +25,7 @@ const Header = () => {
         
         <nav className="nav">
           <button className="nav-link" onClick={handleLogoClick}>Inicio</button>
-          <a href="#servicios" className="nav-link">Servicios</a>
+          <a href = "#servicios" className="nav-link" >Servicios</a>
           <a href="#opiniones" className="nav-link">Opiniones</a>
           <a href="#contacto" className="nav-link">Contacto</a>
         </nav>

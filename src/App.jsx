@@ -8,6 +8,7 @@ import ReviewsSection from './components/ReviewsSection'
 import ProfessionalSection from './components/ProfessionalSection'
 import Footer from './components/Footer'
 import MainContent from './components/MainContent'
+import Services from './components/ServicesPage/ServicePage'
 import './styles/App.css'
 
 // Componente para la página de inicio
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<MainContent />} />
+          <Route path="/services" element={<Services />} />
         </Routes>
       </main>
       <Footer />

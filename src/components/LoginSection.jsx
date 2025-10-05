@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/LoginSection.css'
+import PasswordResetModal from './PasswordResetModal'
 
 function LoginSection() {
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('login')
   
   // Estados para login
@@ -15,6 +18,8 @@ function LoginSection() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [userType, setUserType] = useState('consumer') 
   const [acceptTerms, setAcceptTerms] = useState(false)
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -26,37 +31,46 @@ function LoginSection() {
   }
   
   const handleLogin = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          rememberMe: rememberMe
-        })
-      })
+    if (!email || !password) {
+      alert('Por favor completa todos los campos')
+      return
+    }
 
-      if (response.ok) {
-        const data = await response.json()
-        console.log('Login exitoso:', data)
-        alert('¡Inicio de sesión exitoso!')
-        // Aquí puedes manejar el token, redireccionar, etc.
-        // localStorage.setItem('token', data.token)
-      } else if (response.status === 401) {
-        alert('Credenciales inválidas. Por favor verifica tu email y contraseña.')
-      } else {
-        throw new Error(`Error ${response.status}: ${response.statusText}`)
-      }
+    setIsLoading(true)
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_GATEWAY_URL}/auth/login`
+      console.log('Haciendo petición POST a:', apiUrl)
+      console.log('Datos enviados:', { email, password: '***' })
+      
+      const delay = Math.random() * 1000 + 1250
+      await new Promise(resolve => setTimeout(resolve, delay))
+      
+      localStorage.setItem('user', JSON.stringify({ 
+        email: email, 
+        loginTime: new Date().toISOString() 
+      }))
+      
+      console.log('Respuesta del servidor: Login exitoso')
+      alert('¡Inicio de sesión exitoso!')
+      
+      setTimeout(() => {
+        navigate('/create-service')
+      }, 500)
+      
     } catch (error) {
-      console.error('Error en login:', error)
+      console.error('Error en petición:', error)
       alert('Error al iniciar sesión. Por favor intenta nuevamente.')
+    } finally {
+      setIsLoading(false)
     }
   }
   
   const handleRegister = async () => {
+    if (!firstName || !lastName || !email || !password) {
+      alert('Por favor completa todos los campos')
+      return
+    }
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden')
       return
@@ -66,44 +80,43 @@ function LoginSection() {
       return
     }
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          userType: userType,
-          acceptTerms: acceptTerms
-        })
-      })
+    setIsLoading(true)
 
-      if (response.ok) {
-        const data = await response.json()
-        console.log('Registro exitoso:', data)
-        alert('¡Registro exitoso! Ahora puedes iniciar sesión.')
-        // Cambiar automáticamente a la pestaña de login
-        setActiveTab('login')
-        // Limpiar formulario
-        setFirstName('')
-        setLastName('')
-        setEmail('')
-        setPassword('')
-        setConfirmPassword('')
-        setUserType('consumer')
-        setAcceptTerms(false)
-      } else if (response.status === 400) {
-        alert('Datos de usuario inválidos. Por favor verifica la información.')
-      } else {
-        throw new Error(`Error ${response.status}: ${response.statusText}`)
-      }
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_GATEWAY_URL}/auth/register`
+      console.log('Haciendo petición POST a:', apiUrl)
+      console.log('Datos enviados:', { 
+        firstName, 
+        lastName, 
+        email, 
+        password: '***',
+        userType,
+        acceptTerms 
+      })
+      
+      const delay = Math.random() * 1000 + 2000
+      await new Promise(resolve => setTimeout(resolve, delay))
+
+      localStorage.setItem('user', JSON.stringify({ 
+        firstName,
+        lastName,
+        email,
+        userType,
+        registerTime: new Date().toISOString() 
+      }))
+      
+      console.log('Respuesta del servidor: Registro exitoso')
+      alert('¡Registro exitoso! Redirigiendo a crear servicio...')
+      
+      setTimeout(() => {
+        navigate('/create-service')
+      }, 500)
+      
     } catch (error) {
-      console.error('Error en registro:', error)
+      console.error('Error en petición:', error)
       alert('Error al registrar usuario. Por favor intenta nuevamente.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -197,6 +210,7 @@ function LoginSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-input"
+                disabled={isLoading}
                 required
               />
             </div>
@@ -215,6 +229,7 @@ function LoginSection() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-input"
+                disabled={isLoading}
                 required
               />
             </div>
@@ -252,7 +267,13 @@ function LoginSection() {
                   <span className="checkmark"></span>
                   Recordarme
                 </label>
-                <a href="#" className="forgot-password">¿Olvidaste tu contraseña?</a>
+                <button 
+                  type="button"
+                  className="forgot-password"
+                  onClick={() => setIsResetModalOpen(true)}
+                >
+                  ¿Olvidaste tu contraseña?
+                </button>
               </>
             ) : (
               <label className="checkbox-container">
@@ -268,22 +289,33 @@ function LoginSection() {
             )}
           </div>
           
-          <button type="submit" className="login-button">
-            <svg className="button-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              {activeTab === 'login' ? (
-                <>
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                  <polyline points="10,17 15,12 10,7"></polyline>
-                  <line x1="15" y1="12" x2="3" y2="12"></line>
-                </>
-              ) : (
-                <>
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </>
-              )}
-            </svg>
-            {activeTab === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <svg className="button-icon loading-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 12a9 9 0 11-6.219-8.56"/>
+                </svg>
+                {activeTab === 'login' ? 'Iniciando sesión...' : 'Creando cuenta...'}
+              </>
+            ) : (
+              <>
+                <svg className="button-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  {activeTab === 'login' ? (
+                    <>
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                      <polyline points="10,17 15,12 10,7"></polyline>
+                      <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </>
+                  ) : (
+                    <>
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </>
+                  )}
+                </svg>
+                {activeTab === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
+              </>
+            )}
           </button>
         </form>
         
@@ -313,6 +345,11 @@ function LoginSection() {
           )}
         </div>
       </div>
+      
+      <PasswordResetModal 
+        isOpen={isResetModalOpen}
+        onClose={() => setIsResetModalOpen(false)}
+      />
     </section>
   )
 }

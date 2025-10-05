@@ -9,7 +9,7 @@ import '../styles/UserSection.css' // CSS externo para estilos profesionales
 function UserPage() {
   const [user] = useState({
     name: "Maria Camila",
-    email: "maria@gmail.com",
+    email: "macamayar@gmail.com",
     address: "Calle 123, Bogotá, Colombia",
     phone: "+57 300 1234567",
     dob: "1995-08-20",

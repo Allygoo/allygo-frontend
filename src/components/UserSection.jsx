@@ -42,7 +42,7 @@ function UserPage() {
             <div className="user-details">
               <h1>{user.name}</h1>
               <p className="user-role">
-                <Shield className="icon" /> {user.role}
+                {user.role}
               </p>
               <p className="user-bio">{user.bio}</p>
             </div>
@@ -58,7 +58,7 @@ function UserPage() {
       <div className="stats-grid">
         <div className="stat-card blue">
           <div>
-            <p className="stat-label">Servicios completados</p>
+            <p className="stat-label">Servicios contratados</p>
             <p className="stat-value">{user.servicesCompleted}</p>
           </div>
           <div className="icon-container bg-blue">
@@ -68,7 +68,7 @@ function UserPage() {
 
         <div className="stat-card green">
           <div>
-            <p className="stat-label">Servicios activos</p>
+            <p className="stat-label">Servicios favoritos</p>
             <p className="stat-value">{user.activeServices}</p>
           </div>
           <div className="icon-container bg-green">
@@ -134,13 +134,7 @@ function UserPage() {
                 <p>{new Date(user.dob).toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric'})}</p>
               </div>
             </div>
-            <div className="info-item">
-              <div className="icon bg-blue"><User className="icon" /></div>
-              <div>
-                <p>Edad</p>
-                <p>{new Date().getFullYear() - new Date(user.dob).getFullYear()} años</p>
-              </div>
-            </div>
+          
             <div className="info-item">
               <div className="icon bg-indigo"><Shield className="icon" /></div>
               <div>

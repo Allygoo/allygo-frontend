@@ -68,6 +68,8 @@
 .user-details .user-bio {
   font-style: italic;
   color: #6b7280;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 
 /* Botón Editar */

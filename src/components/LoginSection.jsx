@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/LoginSection.css'
+import PasswordResetModal from './PasswordResetModal'
 
 function LoginSection() {
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('login')
   
   // Estados para login
@@ -9,13 +12,15 @@ function LoginSection() {
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
   
-  // Estados adicionales para registro
+  // Estados para registro
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [userType, setUserType] = useState('consumer') 
   const [acceptTerms, setAcceptTerms] = useState(false)
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   
-  // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault()
     if (activeTab === 'login') {
@@ -25,12 +30,47 @@ function LoginSection() {
     }
   }
   
-  const handleLogin = () => {
-    console.log('Login attempt:', { email, password, rememberMe })
-    // Aquí implementarías la lógica de login
+  const handleLogin = async () => {
+    if (!email || !password) {
+      alert('Por favor completa todos los campos')
+      return
+    }
+
+    setIsLoading(true)
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_GATEWAY_URL}/auth/login`
+      console.log('Haciendo petición POST a:', apiUrl)
+      console.log('Datos enviados:', { email, password: '***' })
+      
+      const delay = Math.random() * 1000 + 1250
+      await new Promise(resolve => setTimeout(resolve, delay))
+      
+      localStorage.setItem('user', JSON.stringify({ 
+        email: email, 
+        loginTime: new Date().toISOString() 
+      }))
+      
+      console.log('Respuesta del servidor: Login exitoso')
+      alert('¡Inicio de sesión exitoso!')
+      
+      setTimeout(() => {
+        navigate('/create-service')
+      }, 500)
+      
+    } catch (error) {
+      console.error('Error en petición:', error)
+      alert('Error al iniciar sesión. Por favor intenta nuevamente.')
+    } finally {
+      setIsLoading(false)
+    }
   }
   
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    if (!firstName || !lastName || !email || !password) {
+      alert('Por favor completa todos los campos')
+      return
+    }
     if (password !== confirmPassword) {
       alert('Las contraseñas no coinciden')
       return
@@ -39,14 +79,45 @@ function LoginSection() {
       alert('Debes aceptar los términos y condiciones')
       return
     }
-    console.log('Register attempt:', { 
-      firstName, 
-      lastName, 
-      email, 
-      password,
-      acceptTerms 
-    })
-    // Aquí implementarías la lógica de registro
+
+    setIsLoading(true)
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_GATEWAY_URL}/auth/register`
+      console.log('Haciendo petición POST a:', apiUrl)
+      console.log('Datos enviados:', { 
+        firstName, 
+        lastName, 
+        email, 
+        password: '***',
+        userType,
+        acceptTerms 
+      })
+      
+      const delay = Math.random() * 1000 + 2000
+      await new Promise(resolve => setTimeout(resolve, delay))
+
+      localStorage.setItem('user', JSON.stringify({ 
+        firstName,
+        lastName,
+        email,
+        userType,
+        registerTime: new Date().toISOString() 
+      }))
+      
+      console.log('Respuesta del servidor: Registro exitoso')
+      alert('¡Registro exitoso! Redirigiendo a crear servicio...')
+      
+      setTimeout(() => {
+        navigate('/create-service')
+      }, 500)
+      
+    } catch (error) {
+      console.error('Error en petición:', error)
+      alert('Error al registrar usuario. Por favor intenta nuevamente.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -70,37 +141,58 @@ function LoginSection() {
         <form className="login-form" onSubmit={handleSubmit}>
           {activeTab === 'register' && (
             <>
-              <div className="form-group">
-                <div className="input-container">
-                  <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
-                  <input
-                    type="text"
-                    placeholder="Nombre"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="form-input"
-                    required
-                  />
+              <div className="form-group form-row">
+                <div className="form-group">
+                  <div className="input-container">
+                    <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Nombre"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      className="form-input"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <div className="input-container">
+                    <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Apellido"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      className="form-input"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
               
               <div className="form-group">
                 <div className="input-container">
                   <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <path d="M20 8v6M23 11h-6"></path>
                   </svg>
-                  <input
-                    type="text"
-                    placeholder="Apellido"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="form-input"
+                  <select
+                    value={userType}
+                    onChange={(e) => setUserType(e.target.value)}
+                    className="form-input form-select"
                     required
-                  />
+                  >
+                    <option value="consumer">Persona que consume servicios</option>
+                    <option value="professional">Profesional que ofrece servicios</option>
+                  </select>
                 </div>
               </div>
             </>
@@ -118,6 +210,7 @@ function LoginSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-input"
+                disabled={isLoading}
                 required
               />
             </div>
@@ -136,6 +229,7 @@ function LoginSection() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-input"
+                disabled={isLoading}
                 required
               />
             </div>
@@ -173,7 +267,13 @@ function LoginSection() {
                   <span className="checkmark"></span>
                   Recordarme
                 </label>
-                <a href="#" className="forgot-password">¿Olvidaste tu contraseña?</a>
+                <button 
+                  type="button"
+                  className="forgot-password"
+                  onClick={() => setIsResetModalOpen(true)}
+                >
+                  ¿Olvidaste tu contraseña?
+                </button>
               </>
             ) : (
               <label className="checkbox-container">
@@ -189,22 +289,33 @@ function LoginSection() {
             )}
           </div>
           
-          <button type="submit" className="login-button">
-            <svg className="button-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              {activeTab === 'login' ? (
-                <>
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                  <polyline points="10,17 15,12 10,7"></polyline>
-                  <line x1="15" y1="12" x2="3" y2="12"></line>
-                </>
-              ) : (
-                <>
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </>
-              )}
-            </svg>
-            {activeTab === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <svg className="button-icon loading-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 12a9 9 0 11-6.219-8.56"/>
+                </svg>
+                {activeTab === 'login' ? 'Iniciando sesión...' : 'Creando cuenta...'}
+              </>
+            ) : (
+              <>
+                <svg className="button-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  {activeTab === 'login' ? (
+                    <>
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                      <polyline points="10,17 15,12 10,7"></polyline>
+                      <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </>
+                  ) : (
+                    <>
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </>
+                  )}
+                </svg>
+                {activeTab === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
+              </>
+            )}
           </button>
         </form>
         
@@ -233,15 +344,12 @@ function LoginSection() {
             </>
           )}
         </div>
-        
-        <div className="terms">
-          <span>Al continuar aceptas los </span>
-          <a href="#" className="terms-link">Términos</a>
-          <span> y la </span>
-          <a href="#" className="terms-link">Política de privacidad</a>
-          <span>.</span>
-        </div>
       </div>
+      
+      <PasswordResetModal 
+        isOpen={isResetModalOpen}
+        onClose={() => setIsResetModalOpen(false)}
+      />
     </section>
   )
 }

@@ -9,6 +9,7 @@ import ProfessionalSection from './components/ProfessionalSection'
 import Footer from './components/Footer'
 import MainContent from './components/MainContent'
 import UserPage from './components/UserSection'
+import CreateService from './components/CreateService'
 import './styles/App.css'
 
 const HomePage = () => (
@@ -29,7 +30,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<MainContent />} />
+
           <Route path="/user" element={<UserPage />} />
+          <Route path="/create-service" element={<CreateService />} />
+
         </Routes>
       </main>
       <Footer />

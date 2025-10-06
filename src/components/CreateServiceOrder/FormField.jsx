@@ -1,7 +1,8 @@
 import React from 'react'
 import '../../styles/CreateServiceOrder/FormField.css'
 
-const FormField = ({ label, type, placeholder, icon, value, onChange, readOnly }) => {
+// Se añade ...rest para permitir atributos adicionales como min, max, step, name, etc.
+const FormField = ({ label, type, placeholder, icon, value, onChange, readOnly, ...rest }) => {
   const getIcon = () => {
     switch (icon) {
       case 'user':
@@ -49,10 +50,11 @@ const FormField = ({ label, type, placeholder, icon, value, onChange, readOnly }
         <input
           type={type}
           placeholder={placeholder}
-            className="field-input"
+          className="field-input"
           value={value}
           onChange={onChange}
           readOnly={readOnly}
+          {...rest}
         />
       </div>
     </div>

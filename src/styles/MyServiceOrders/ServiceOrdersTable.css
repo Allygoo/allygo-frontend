@@ -3,7 +3,9 @@
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  overflow: hidden;
+  /* Antes: overflow: hidden; esto cortaba el scroll cuando el contenido excedía la altura de la ventana */
+  overflow: visible;
+  /* Si se desea cabecera fija más adelante se puede envolver la tabla en un div con max-height y overflow:auto */
 }
 
 .table-header {

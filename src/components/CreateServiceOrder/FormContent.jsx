@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import FormField from './FormField'
 import '../../styles/CreateServiceOrder/FormContent.css'
@@ -9,6 +9,29 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
 
   // Estados controlados del formulario
   const [requesterName, setRequesterName] = useState('');
+  // Cargar nombre de usuario desde localStorage una sola vez
+  useEffect(() => {
+    try {
+      let fullName = ''
+      const raw = localStorage.getItem('user')
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        const fn = (parsed.firstName || parsed.first_name || '').toString().trim()
+        const ln = (parsed.lastName || parsed.last_name || '').toString().trim()
+        const combined = [fn, ln].filter(Boolean).join(' ')
+        if (combined) fullName = combined
+      } else {
+        const fn = (localStorage.getItem('firstName') || '').trim()
+        const ln = (localStorage.getItem('lastName') || '').trim()
+        const combined = [fn, ln].filter(Boolean).join(' ')
+        if (combined) fullName = combined
+      }
+      if (fullName) setRequesterName(fullName)
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.warn('[create-order] No se pudo obtener nombre de usuario de localStorage', err)
+    }
+  }, [])
   const [dateBegin, setDateBegin] = useState('');
   const [dateFinish, setDateFinish] = useState('');
   const [address, setAddress] = useState('');
@@ -20,9 +43,26 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
   const USER_ID = 1;
   const workerId = professional?.id; // esperado del objeto professional
 
+  // Redondear a minutos para formato datetime-local
+  const nowRounded = useMemo(() => {
+    const d = new Date();
+    d.setSeconds(0, 0);
+    return d;
+  }, []);
+
+  function toLocalDateTimeValue(date) {
+    if (!date) return '';
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  }
+
+  const minBegin = toLocalDateTimeValue(nowRounded);
+  const minFinish = dateBegin ? dateBegin : minBegin;
+
   function validate() {
     if (!requesterName.trim()) return 'Ingresa el nombre del solicitante';
     if (!dateBegin) return 'Selecciona fecha/hora de inicio';
+    if (new Date(dateBegin) < nowRounded) return 'La fecha de inicio debe ser en el futuro';
     if (!dateFinish) return 'Selecciona fecha/hora de fin';
     if (new Date(dateFinish) < new Date(dateBegin)) return 'La fecha fin no puede ser anterior al inicio';
     if (!address.trim()) return 'Ingresa la dirección';
@@ -98,10 +138,11 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
         <FormField
           label="Nombre de Usuario solicitante"
           type="text"
-          placeholder="Ej.: Juan Pérez"
+          placeholder="(Nombre cargado automáticamente)"
           icon="user"
           value={requesterName}
-          onChange={e => setRequesterName(e.target.value)}
+          readOnly
+          onChange={() => {}}
         />
 
         <div className="form-row">
@@ -111,6 +152,7 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
             placeholder="Seleccionar fecha y hora"
             icon="calendar"
             value={dateBegin}
+            min={minBegin}
             onChange={e => setDateBegin(e.target.value)}
           />
           <FormField
@@ -119,6 +161,7 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
             placeholder="Seleccionar fecha y hora"
             icon="calendar"
             value={dateFinish}
+            min={minFinish}
             onChange={e => setDateFinish(e.target.value)}
           />
         </div>

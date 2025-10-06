@@ -123,7 +123,24 @@ const ServiceOrdersTable = () => {
   return (
     <div className="table-container">
       <header className="table-header">
-        <h1 className="table-title">Mis Órdenes (Usuario #1)</h1>
+        {(() => {
+          let fullName = 'Usuario'
+          try {
+            const raw = localStorage.getItem('user')
+            if (raw) {
+              // Suponemos que el objeto fue guardado como JSON: {"firstName":"...","lastName":"..."}
+              const parsed = JSON.parse(raw)
+              const fn = (parsed.firstName || parsed.first_name || '').toString().trim()
+              const ln = (parsed.lastName || parsed.last_name || '').toString().trim()
+              const combined = [fn, ln].filter(Boolean).join(' ')
+              if (combined) fullName = combined
+            }
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.warn('[orders] No se pudo leer usuario de localStorage:', err)
+          }
+          return <h1 className="table-title">Tus Ordenes {fullName}</h1>
+        })()}
         <div className="table-actions">
           <div className="search-container">
             <svg className="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">

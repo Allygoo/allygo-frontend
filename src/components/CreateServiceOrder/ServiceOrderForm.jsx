@@ -3,11 +3,15 @@ import Sidebar from './Sidebar'
 import FormContent from './FormContent'
 import '../../styles/CreateServiceOrder/ServiceOrderForm.css'
 
-const ServiceOrderForm = () => {
+const ServiceOrderForm = ({ professional, onClose, onSuccess }) => {
   return (
     <div className="service-order-container">
       <Sidebar />
-      <FormContent />
+      <FormContent 
+        professional={professional}
+        onClose={onClose}
+        onSuccess={onSuccess}
+      />
     </div>
   )
 }

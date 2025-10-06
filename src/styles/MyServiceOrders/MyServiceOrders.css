@@ -1,0 +1,37 @@
+.app {
+  background-color: white;
+  min-height: 100vh;
+}
+
+/* Layout específico de MyServiceOrders para evitar conflictos con otras .main-content */
+.orders-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 0 16px 16px 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* La tabla debe ocupar el espacio restante */
+.orders-layout .table-container {
+  flex: 1;
+  min-width: 0; /* permite que el contenido flex se reduzca sin overflow */
+}
+
+@media (max-width: 1024px) {
+  .orders-layout {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 860px) {
+  .orders-layout {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 12px 12px 12px;
+  }
+  .orders-layout .sidebar {
+    width: 100%;
+  }
+}

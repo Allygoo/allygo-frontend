@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../../styles/Professionals/ProfessionalCard.css'
 import Modal from '../Modal/Modal'
 import CreateServiceOrder from '../CreateServiceOrder/CreateServiceOrder'
@@ -8,6 +9,7 @@ const ProfessionalCard = ({ professional }) => {
 
   // Estado del modal: inicia cerrado
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate();
 
   const getAvailabilityColor = (availability) => {
     switch (availability) {
@@ -63,7 +65,14 @@ const ProfessionalCard = ({ professional }) => {
       </div>
       {/* Modal para crear orden */}
       <Modal open={open} onClose={() => setOpen(false)}>
-        <CreateServiceOrder />
+        <CreateServiceOrder 
+          professional={professional}
+          onClose={() => setOpen(false)}
+          onSuccess={() => {
+            setOpen(false);
+            navigate('/my-service-orders');
+          }}
+        />
       </Modal>
     </div>
   )

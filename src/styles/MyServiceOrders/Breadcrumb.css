@@ -1,0 +1,30 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.breadcrumb-item {
+  color: #6b7280;
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #374151;
+  font-weight: 500;
+}
+
+.breadcrumb-separator {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .breadcrumb {
+    padding: 12px;
+    font-size: 13px;
+  }
+}

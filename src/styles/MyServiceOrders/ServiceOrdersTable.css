@@ -1,0 +1,383 @@
+.table-container {
+  flex: 1;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  z-index: 1;
+}
+
+.search-input {
+  padding: 8px 12px 8px 36px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 200px;
+  background-color: white;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.export-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-button:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.new-order-button {
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-order-button:hover {
+  background-color: #2563eb;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th {
+  text-align: left;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.orders-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: top;
+}
+
+.orders-table tr:hover {
+  background-color: #f9fafb;
+}
+
+.order-id {
+  font-weight: 500;
+  color: #111827;
+  font-size: 14px;
+}
+
+.order-date {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.service-location {
+  min-width: 180px;
+}
+
+.service-name {
+  font-weight: 500;
+  color: #111827;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.location {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.user-info {
+  min-width: 160px;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #111827;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.user-date {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.professional-info {
+  min-width: 180px;
+}
+
+.professional-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.professional-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.professional-details {
+  flex: 1;
+}
+
+.professional-name {
+  font-weight: 500;
+  color: #111827;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.professional-id {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.order-status {
+  min-width: 120px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-completed {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-in-progress {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-scheduled {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.actions {
+  width: 80px;
+}
+
+.view-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  color: #6b7280;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-button:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+.table-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.results-count {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* === Botón pagar === */
+.pay-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  transition: background .2s, transform .15s;
+}
+
+.pay-btn:hover:not(:disabled) { background: #1d4ed8; }
+.pay-btn:active:not(:disabled) { transform: scale(.96); }
+.pay-btn:disabled { opacity: .75; cursor: not-allowed; }
+
+/* Estado loading: animación de pulso suave */
+.pay-btn.loading {
+  background: linear-gradient(90deg,#2563eb,#1d4ed8,#2563eb);
+  background-size: 200% 100%;
+  animation: paybtn-gradient 1.4s linear infinite;
+}
+
+@keyframes paybtn-gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Spinner interno */
+.pay-btn .spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .table-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 12px 16px;
+  }
+
+  .orders-table th {
+    font-size: 11px;
+  }
+
+  .service-location,
+  .user-info,
+  .professional-info {
+    min-width: auto;
+  }
+
+  .professional-container {
+    gap: 8px;
+  }
+
+  .professional-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .table-footer {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .orders-table {
+    font-size: 13px;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 8px 12px;
+  }
+
+  .service-name,
+  .user-name,
+  .professional-name,
+  .order-id {
+    font-size: 13px;
+  }
+
+  .location,
+  .user-date,
+  .professional-id {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,87 @@
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.sidebar-section {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.sidebar-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.filter-dropdown,
+.date-filter,
+.location-filter,
+.professional-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.filter-dropdown:hover,
+.date-filter:hover,
+.location-filter:hover,
+.professional-filter:hover {
+  border-color: #9ca3af;
+}
+
+.dropdown-icon,
+.calendar-icon,
+.location-icon,
+.user-icon {
+  flex-shrink: 0;
+}
+
+.dropdown-text,
+.date-text,
+.location-text,
+.professional-text {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+  
+  .sidebar-section {
+    padding: 16px;
+  }
+}

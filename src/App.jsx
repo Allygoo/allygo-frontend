@@ -10,7 +10,7 @@ import Footer from './components/Footer'
 import MainContent from './components/MainContent'
 import Services from './components/ServicesPage/ServicePage'
 import Professionals from './components/ProfessionalsPage/Professionals'
-import CreateServiceOrder from './components/CreateServiceOrder/CreateServiceOrder'
+import MyServiceOrders from './components/MyServiceOrders/MyServiceOrders'
 import './styles/App.css'
 
 // Componente para la página de inicio
@@ -35,6 +35,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/services/:categoryId" element={<Services />} />
           <Route path="/services/:categoryId/professionals/:serviceId" element={<Professionals />} />
+          <Route path="/my-service-orders" element={<MyServiceOrders />} />
         </Routes>
       </main>
       <Footer />

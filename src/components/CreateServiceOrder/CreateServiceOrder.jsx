@@ -3,15 +3,19 @@ import Breadcrumb from './Breadcrumb'
 import ServiceOrderForm from './ServiceOrderForm'
 import '../../styles/CreateServiceOrder/CreateServiceOrder.css'
 
-function App() {
+function CreateServiceOrder({ professional, onClose, onSuccess }) {
   return (
     <div className="app">
       {/* <Breadcrumb /> */}
       <div className="app-content">
-        <ServiceOrderForm />
+        <ServiceOrderForm 
+          professional={professional}
+          onClose={onClose}
+          onSuccess={onSuccess}
+        />
       </div>
     </div>
   )
 }
 
-export default App
+export default CreateServiceOrder

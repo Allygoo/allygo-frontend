@@ -38,7 +38,7 @@ const ReviewsSection = () => {
                 src={review.avatar} 
                 alt={review.name}
                 className="review-avatar"
-                referrerpolicy="no-referrer"
+                referrerPolicy="no-referrer"
               />
               <div className="review-info">
                 <h4 className="review-name">{review.name}</h4>

@@ -1,17 +1,33 @@
 /* Layout de página completa. Cuando se usa dentro de un modal lo sobreescribimos en Modal.css */
-.app {
+.create-order-root {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #f5f6f7; /* tono ligeramente más suave */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Contenedor principal de la página. En modal se anula el max-width y padding */
 .app-content {
   display: flex;
-  gap: 24px;
-  padding: 24px;
-  max-width: 1200px;
+  gap: 20px;
+  padding: 20px 32px; /* menos padding vertical, algo más horizontal controlado */
+  max-width: 1080px; /* más compacto */
   margin: 0 auto;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Limitar ancho del formulario interior para que no se expanda demasiado y genere bloques vacíos */
+.service-order-container .form-content {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ajustar barra lateral para no robar espacio excesivo */
+.service-order-container .sidebar {
+  width: 240px;
 }
 
 @media (max-width: 768px) {

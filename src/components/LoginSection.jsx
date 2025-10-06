@@ -55,7 +55,7 @@ function LoginSection() {
       alert('¡Inicio de sesión exitoso!')
       
       setTimeout(() => {
-        navigate('/create-service')
+        navigate('/')
       }, 500)
       
     } catch (error) {

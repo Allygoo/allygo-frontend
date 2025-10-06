@@ -132,7 +132,8 @@ const ServiceOrdersTable = () => {
               const parsed = JSON.parse(raw)
               const fn = (parsed.firstName || parsed.first_name || '').toString().trim()
               const ln = (parsed.lastName || parsed.last_name || '').toString().trim()
-              const combined = [fn, ln].filter(Boolean).join(' ')
+              const email = (parsed.email || '').toString().trim()
+              const combined = [fn, ln, email].filter(Boolean).join(' ')
               if (combined) fullName = combined
             }
           } catch (err) {

@@ -5,7 +5,7 @@ import '../../styles/CreateServiceOrder/CreateServiceOrder.css'
 
 function CreateServiceOrder({ professional, onClose, onSuccess }) {
   return (
-    <div className="app">
+    <div className="create-order-root">
       {/* <Breadcrumb /> */}
       <div className="app-content">
         <ServiceOrderForm 

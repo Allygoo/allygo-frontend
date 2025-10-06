@@ -18,7 +18,8 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
         const parsed = JSON.parse(raw)
         const fn = (parsed.firstName || parsed.first_name || '').toString().trim()
         const ln = (parsed.lastName || parsed.last_name || '').toString().trim()
-        const combined = [fn, ln].filter(Boolean).join(' ')
+        const email = (parsed.email || '').toString().trim()
+        const combined = [fn, ln, email].filter(Boolean).join(' ')
         if (combined) fullName = combined
       } else {
         const fn = (localStorage.getItem('firstName') || '').trim()
@@ -138,7 +139,7 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
         <FormField
           label="Nombre de Usuario solicitante"
           type="text"
-          placeholder="(Nombre cargado automáticamente)"
+          placeholder="Usuario"
           icon="user"
           value={requesterName}
           readOnly
@@ -169,7 +170,7 @@ const FormContent = ({ professional, onClose, onSuccess }) => {
         <FormField
           label="Dirección del servicio"
           type="text"
-          placeholder="Ej.: Carrea 15 Este # 20 b Sur, Bogotá, Piso 3"
+          placeholder="Ej.: Carrera 15 Este # 20 B Sur, Bogotá, Piso 3"
           icon="location"
           value={address}
           onChange={e => setAddress(e.target.value)}

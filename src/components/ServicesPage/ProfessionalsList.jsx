@@ -26,14 +26,14 @@ const ProfessionalsList = () => {
   return (
     <div className="professionals-section">
       <h2>Profesionales destacados</h2>
-      <div className="professionals-grid">
+      {/* <div className="professionals-grid">
         {professionals.map(professional => (
           <div key={professional.id} className="professional-card">
             <div className="professional-info">
               <img 
                 src={professional.avatar} 
                 alt={professional.name}
-                referrerpolicy="no-referrer"
+                referrerPolicy="no-referrer"
                 className="professional-avatar"
               />
               <div className="professional-details">
@@ -58,7 +58,8 @@ const ProfessionalsList = () => {
             <button className="view-profile-btn">Ver perfil</button>
           </div>
         ))}
-      </div>
+      </div> */}
+      Proximamente...
     </div>
   )
 }

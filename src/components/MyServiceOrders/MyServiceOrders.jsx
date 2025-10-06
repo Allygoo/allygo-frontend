@@ -6,7 +6,7 @@ import '../../styles/MyServiceOrders/MyServiceOrders.css'
 
 function App() {
   return (
-    <div className="app">
+    <div className="my-orders-app">
       {/* <Breadcrumb /> */}
       <div className="orders-layout">
         <Sidebar />

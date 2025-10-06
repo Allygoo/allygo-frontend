@@ -49,7 +49,7 @@ const HeroSection = () => {
             src={professional}
             alt="Profesional trabajando"
             className="hero-image"
-            referrerpolicy="no-referrer"
+            referrerPolicy="no-referrer"
           />
         </div>
       </div>

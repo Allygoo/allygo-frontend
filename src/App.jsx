@@ -11,9 +11,10 @@ import MainContent from './components/MainContent'
 import Services from './components/ServicesPage/ServicePage'
 import Professionals from './components/ProfessionalsPage/Professionals'
 import MyServiceOrders from './components/MyServiceOrders/MyServiceOrders'
+import UserPage from './components/UserSection'
+import CreateService from './components/CreateService'
 import './styles/App.css'
 
-// Componente para la página de inicio
 const HomePage = () => (
   <>
     <HeroSection />
@@ -36,6 +37,10 @@ function App() {
           <Route path="/services/:categoryId" element={<Services />} />
           <Route path="/services/:categoryId/professionals/:serviceId" element={<Professionals />} />
           <Route path="/my-service-orders" element={<MyServiceOrders />} />
+
+          <Route path="/user" element={<UserPage />} />
+          <Route path="/create-service" element={<CreateService />} />
+
         </Routes>
       </main>
       <Footer />

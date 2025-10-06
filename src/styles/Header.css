@@ -103,6 +103,49 @@
   background: #0052a3;
 }
 
+/* User Menu Styles */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-greeting {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: #EF4444;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logout-btn:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+}
+
+.logout-icon {
+  width: 16px;
+  height: 16px;
+}
+
 @media (max-width: 768px) {
   .header-container {
     padding: 0 16px;
@@ -117,8 +160,18 @@
   }
   
   .search-btn,
-  .publish-btn {
+  .publish-btn,
+  .logout-btn {
     padding: 6px 12px;
     font-size: 13px;
+  }
+  
+  .user-menu {
+    gap: 12px;
+  }
+  
+  .user-greeting {
+    font-size: 13px;
+    display: none; /* Ocultar saludo en móvil para ahorrar espacio */
   }
 }
